@@ -1,3 +1,147 @@
 [submodule "mathiasbynens"]
 	path = mathiasbynens
 	url = https://github.com/mathiasbynens/dotfiles.git
+[submodule "atomantic"]
+	path = atomantic
+	url = https://github.com/atomantic/dotfiles.git
+[submodule "Abdullah"]
+	path = Abdullah
+	url = https://gitlab.com/Abdullah/cfg.git
+[submodule "Abhishek"]
+	path = Abhishek
+	url = https://github.com/2KAbhishek/Dotfiles.git
+[submodule "adityarpillai"]
+	path = adityarpillai
+	url = https://github.com/adityarpillai/jumpstart.git
+[submodule "aeolyus"]
+	path = aeolyus
+	url = https://github.com/aeolyus/dotfiles.git
+[submodule "AndersBallegaard"]
+	path = AndersBallegaard
+	url = https://github.com/AndersBallegaard/dotfiles.git
+[submodule "MrPickles"]
+	path = MrPickles
+	url = https://github.com/MrPickles/dotfiles.git
+[submodule "andschwa"]
+	path = andschwa
+	url = https://github.com/andschwa/dotfiles.git
+[submodule "sapegin"]
+	path = sapegin
+	url = https://github.com/sapegin/dotfiles.git
+[submodule "ashishb"]
+	path = ashishb
+	url = https://github.com/ashishb/dotfiles.git
+[submodule "awesome-dotfiles"]
+	path = awesome-dotfiles
+	url = https://github.com/webpro/awesome-dotfiles.git
+[submodule "bashdot"]
+	path = bashdot
+	url = https://github.com/bashdot/bashdot.git
+[submodule "cowboy"]
+	path = cowboy
+	url = https://github.com/cowboy/dotfiles.git
+[submodule "bndabbs"]
+	path = bndabbs
+	url = https://github.com/bndabbs/dotfiles.git
+[submodule "cristianpb"]
+	path = cristianpb
+	url = https://github.com/cristianpb/dotfiles.git
+[submodule "rootbeersoup"]
+	path = rootbeersoup
+	url = https://github.com/rootbeersoup/dotfiles.git
+[submodule "dikiaap"]
+	path = dikiaap
+	url = https://github.com/dikiaap/dotfiles.git
+[submodule "dotphiles"]
+	path = dotphiles
+	url = https://github.com/dotphiles/dotphiles.git
+[submodule "driesvints"]
+	path = driesvints
+	url = https://github.com/driesvints/dotfiles.git
+[submodule "eduardolundgren"]
+	path = eduardolundgren
+	url = https://github.com/eduardolundgren/dotfiles.git
+[submodule "solarized"]
+	path = solarized
+	url = https://github.com/altercation/solarized.git
+[submodule "liquidprompt"]
+	path = liquidprompt
+	url = https://github.com/nojhan/liquidprompt.git
+[submodule "Kraymer"]
+	path = Kraymer
+	url = https://github.com/Kraymer/F-dotfiles.git
+[submodule "volny"]
+	path = volny
+	url = https://github.com/volny/dotconfig.git
+[submodule "huyvohcmc"]
+	path = huyvohcmc
+	url = https://github.com/huyvohcmc/dotfiles.git
+[submodule "statico"]
+	path = statico
+	url = https://github.com/statico/dotfiles.git
+[submodule "jbwyatt4"]
+	path = jbwyatt4
+	url = https://gitlab.com/jbwyatt4/chef_dotfile_manager_tutorial.git
+[submodule "jeffaco"]
+	path = jeffaco
+	url = https://github.com/jeffaco/dotfiles.git
+[submodule "jh3y"]
+	path = jh3y
+	url = https://github.com/jh3y/kody.git
+[submodule "JDevlieghere"]
+	path = JDevlieghere
+	url = https://github.com/JDevlieghere/dotfiles.git
+[submodule "kvendrik"]
+	path = kvendrik
+	url = https://github.com/kvendrik/dotfiles.git
+[submodule "kutsan"]
+	path = kutsan
+	url = https://github.com/kutsan/dotfiles.git
+[submodule "mattorb"]
+	path = mattorb
+	url = https://github.com/mattorb/dotfiles.git
+[submodule "mihaliak"]
+	path = mihaliak
+	url = https://github.com/mihaliak/dotfiles.git
+[submodule "mohitsinghs"]
+	path = mohitsinghs
+	url = https://github.com/mohitsinghs/dotfiles.git
+[submodule "neeasade"]
+	path = neeasade
+	url = https://github.com/neeasade/dotfiles.git
+[submodule "nelsonmestevao"]
+	path = nelsonmestevao
+	url = https://github.com/nelsonmestevao/dotfiles.git
+[submodule "nicksp"]
+	path = nicksp
+	url = https://github.com/nicksp/dotfiles.git
+[submodule "sobolevn"]
+	path = sobolevn
+	url = https://github.com/sobolevn/dotfiles.git
+[submodule "Overbryd"]
+	path = Overbryd
+	url = https://github.com/Overbryd/dotfiles.git
+[submodule "paulmillr"]
+	path = paulmillr
+	url = https://github.com/paulmillr/dotfiles.git
+[submodule "ridhwaans"]
+	path = ridhwaans
+	url = https://github.com/ridhwaans/dotfiles.git
+[submodule "rkalis"]
+	path = rkalis
+	url = https://github.com/rkalis/dotfiles.git
+[submodule "xero"]
+	path = xero
+	url = https://github.com/xero/dotfiles.git
+[submodule "skwp"]
+	path = skwp
+	url = https://github.com/skwp/dotfiles.git
+[submodule "holman"]
+	path = holman
+	url = https://github.com/holman/dotfiles.git
+[submodule "posquit0"]
+	path = posquit0
+	url = https://github.com/posquit0/dotfiles.git
+[submodule "kornicameister"]
+	path = kornicameister
+	url = https://github.com/kornicameister/dotfiles.git
