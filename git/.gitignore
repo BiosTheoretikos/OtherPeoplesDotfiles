@@ -1,0 +1,6 @@
+.DS_Store
+*~
+*.swp
+*.pyc
+dump.rdb
+.config/git/credentials
