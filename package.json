@@ -1,0 +1,65 @@
+{
+  "name": "kody",
+  "description": ".files in node",
+  "version": "2.0.1",
+  "homepage": "https://github.com/jh3y/kody",
+  "author": {
+    "name": "jh3y <jh3y@users.noreply.github.com>"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jh3y/kody.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jh3y/kody/issues"
+  },
+  "license": "MIT",
+  "fields": [
+    "./lib/**/*.*"
+  ],
+  "scripts": {
+    "precommit": "lint-staged",
+    "prepublish": "make build"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "kody": "./bin/kody"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.16.0",
+    "inquirer": "^6.0.0",
+    "ora": "^3.0.0",
+    "regenerator-runtime": "^0.12.0",
+    "shelljs": "^0.8.2"
+  },
+  "lint-staged": {
+    "src/**/*.{js}": [
+      "make lint",
+      "git add"
+    ]
+  },
+  "keywords": [],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.6",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "eslint": "^5.2.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.0",
+    "mocha": "^5.2.0",
+    "prettier": "^1.13.7",
+    "prettier-eslint": "^8.8.2"
+  }
+}
