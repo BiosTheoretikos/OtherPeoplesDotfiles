@@ -32,3 +32,4 @@ JDevlieghere	https://github.com/JDevlieghere/dotfiles.git
 kvendrik	https://github.com/kvendrik/dotfiles.git
 kutsan	https://github.com/kutsan/dotfiles.git
 mattorb	https://github.com/mattorb/dotfiles.git
+mihaliak	https://github.com/mihaliak/dotfiles.git
