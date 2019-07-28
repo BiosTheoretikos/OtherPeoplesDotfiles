@@ -3,3 +3,4 @@ atomantic	https://github.com/atomantic/dotfiles.git
 Abdullah	https://gitlab.com/Abdullah/cfg.git
 Abhishek	https://github.com/2KAbhishek/Dotfiles.git
 adityarpillai	https://github.com/adityarpillai/jumpstart.git
+aeolyus	https://github.com/aeolyus/dotfiles.git
