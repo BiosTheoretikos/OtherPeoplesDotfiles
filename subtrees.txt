@@ -21,3 +21,4 @@ driesvints	https://github.com/driesvints/dotfiles.git
 eduardolundgren	https://github.com/eduardolundgren/dotfiles.git
 solarized	https://github.com/altercation/solarized.git
 liquidprompt	https://github.com/nojhan/liquidprompt.git
+Kraymer	https://github.com/Kraymer/F-dotfiles.git
