@@ -40,3 +40,4 @@ nicksp	https://github.com/nicksp/dotfiles.git
 sobolevn	https://github.com/sobolevn/dotfiles.git
 Overbryd	https://github.com/Overbryd/dotfiles.git
 paulmillr	https://github.com/paulmillr/dotfiles.git
+ridhwaans	https://github.com/ridhwaans/dotfiles.git
