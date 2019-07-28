@@ -46,3 +46,4 @@ xero	https://github.com/xero/dotfiles.git
 skwp	https://github.com/skwp/dotfiles.git
 holman	https://github.com/holman/dotfiles.git
 posquit0	https://github.com/posquit0/dotfiles.git
+kornicameister	https://github.com/kornicameister/dotfiles.git
