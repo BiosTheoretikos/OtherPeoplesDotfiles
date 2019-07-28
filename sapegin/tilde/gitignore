@@ -1,0 +1,25 @@
+# Python stuff
+*.pyc
+VENV
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# npm
+npm-debug.log
+
+# Yarn
+yarn-error.log
+
+# IDEs stuff
+.idea
+.rubymine_helpers

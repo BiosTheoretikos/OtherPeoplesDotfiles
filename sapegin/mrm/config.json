@@ -1,0 +1,24 @@
+{
+    "name": "Artem Sapegin",
+    "email": "artem@sapegin.ru",
+    "url": "http://sapegin.me",
+    "github": "sapegin",
+    "eslintPreset": "tamia",
+    "eslintObsoleteDependencies": ["eslint-plugin-prettier"],
+    "semanticArgs": "--analyze-commits semantic-release-tamia/analyzeCommits --verify-release semantic-release-tamia/verifyRelease --generate-notes semantic-release-tamia/generateNotes",
+    "semanticPeerDependencies": ["semantic-release-tamia"],
+    "stylelintExtensions": ".pcss",
+    "prettierPattern": "**/*.{js,md}",
+    "prettierOptions": {
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "arrowParens": "always",
+      "useTabs": true
+    },
+    "aliases": {
+        "node": ["package", "editorconfig", "gitignore", "eslint", "prettier", "lint-staged", "jsconfig"],
+        "oss": ["package", "license", "readme", "contributing", "editorconfig", "gitignore", "eslint", "prettier", "lint-staged", "jsconfig"],
+        "site": ["package", "editorconfig", "gitignore", "eslint", "stylelint", "tamia"],
+        "sync": ["license", "editorconfig", "gitignore", "eslint", "prettier", "lint-staged"]
+    }
+}
