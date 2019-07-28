@@ -7,3 +7,4 @@ aeolyus	https://github.com/aeolyus/dotfiles.git
 AndersBallegaard	https://github.com/AndersBallegaard/dotfiles.git
 MrPickles	https://github.com/MrPickles/dotfiles.git
 andschwa	https://github.com/andschwa/dotfiles.git
+sapegin	https://github.com/sapegin/dotfiles.git
