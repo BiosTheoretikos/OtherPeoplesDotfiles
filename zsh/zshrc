@@ -1,0 +1,35 @@
+#              _
+#             | |
+#      _______| |__  _ __ ___
+#     |_  / __| '_ \| '__/ __|
+#    _ / /\__ \ | | | | | (__
+#   (_)___|___/_| |_|_|  \___|
+
+export DOTFILES="$HOME/.dotfiles"
+export PATH=$PATH:$HOME/.spells:$HOME/.spells/git:$HOME/.spells/rofi
+
+source $DOTFILES/zsh/plugins.zsh
+source $DOTFILES/zsh/theme.zsh
+source $DOTFILES/zsh/aliases.zsh
+source $DOTFILES/zsh/functions.zsh
+
+source $DOTFILES/asdf/asdf.init
+source $DOTFILES/haskell/haskell.init
+
+eval "$(direnv hook zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
