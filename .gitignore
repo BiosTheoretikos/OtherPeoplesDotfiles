@@ -1,0 +1,33 @@
+# Vim
+.vim/bundle/
+.vim/undo/
+.vim/autoload/
+.vim/plugged/
+.vim/init.vim
+.vim/.netrwhist
+.vim/files/info/.gitkeep
+
+# Python
+*.pyc
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+.DS_Store
+
+# Untracked
+.localrc
+
+# bin
+/bin/*/
+
+# weechat
+.weechat/logs/
+.weechat/sec.conf
+.weechat/script/
+.weechat/certs/
