@@ -1,0 +1,30 @@
+# W Commands
+wcommit () {
+    git add -A .
+    git commit -am "${1}"
+}
+
+wpush () {
+    wcommit "${1}"
+    git push
+}
+
+#### W Hostfile Commands
+alias wallow="sudo cp <%=wuser_dir%>.chef/hosts.bk.allow /etc/hosts"
+
+alias wblock="sudo cp <%=wuser_dir%>.chef/hosts.bk.block /etc/hosts"
+
+# W Update Commands
+<% if node['platform'] == "ubuntu" %>
+alias wupdate='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade && sudo apt autoremove -y && sudo apt clean'
+
+<% end %>
+<%# Ubuntu and Debian are not combined because apt dist-upgrade could break debian testing %>
+<% if node['platform'] == "debian" %>
+alias wupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean'
+
+<% end %>
+<% if node['platform'] == "arch" %>
+alias wupdate='sudo pacman -Syyu && sudo paccache -dvuk0 && sudo -v && yaourt -Su --aur'
+
+<% end %>

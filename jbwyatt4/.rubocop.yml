@@ -1,0 +1,25 @@
+AllCops:
+  Exclude:
+    - '.git/**/*'
+    - 'Gemfile.lock'
+    # Chef generates ruby style guide errors by default
+    - 'cookbooks/**/test/**/*'
+    - 'cookbooks/**/spec/**/*'
+    - 'cookbooks/**/Berksfile'
+
+# I like using not in my code unless I can use unless
+Style/Not:
+  Enabled: false
+# Did not like ]) at the end and I do
+Layout/IndentArray:
+  Enabled: false
+# Consider re-enabling later-but for now keep single lines ifs to expand later
+Style/IfUnlessModifier:
+  Enabled: false
+# Wants you to use %w[a b c], which does not look that nice for a list of
+# package names
+Style/WordArray:
+  Enabled: false
+# I set gems by the order they are used and their priority, not by the alphabet
+Bundler/OrderedGems:
+  Enabled: false
