@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# all switcher dmenu
+
+switch=""
+options=""
+
+add_switch() {
+  options="${options}"$'\n'"${1}"
+  switch="$switch '$(echo "${1}" | sed "s#'#\'\\\'\'#g")') ${2};;"
+}
+
+# windows
+for wid in $wids; do
+  add_switch "window: $(xtitle $wid)" "bspc node $wid -g hidden=off; bspc node -f $wid"
+done
+
+# emacs buffers
+buffers="$(
+elisp '(-remove (lambda (buffer)
+           (or (s-match "magit" buffer)
+             (s-match "\*.*" buffer)))
+  (mapcar (function buffer-name)
+    (buffer-list)))
+' | sed 's/" "/\n/g;s/("//;s/")//'
+)"
+
+for buffer in $buffers; do
+  add_switch "buffer: $buffer" "select_action 'window: emacs' && elisp '(counsel-switch-to-buffer-or-window \"${buffer}\")'"
+done
+
+# qutebrowser tab titles
+open_urls() {
+  qb_command ':session-save'
+  grep -A 6 '    \- active: true' "$HOME/.local/share/qutebrowser/sessions/default.yml" | grep title | sed 's/.*title: //'
+}
+
+# for url in "$(open_urls)"; do
+while read -r url; do
+  add_switch "tab: $url" "select_action '\- qutebrowser' && qb_command ':buffer $(echo "$url" | sed "s/'//g")'"
+done <<< "$(open_urls)"
+
+select_action() {
+  # allow partial match for emacs switch match call
+  # pause to rethink your life
+  target="$(echo "$options" | grep "$@")"
+  eval "case \"${target}\" in $switch esac"
+}
+
+switch="$switch *) ;;"
+select_action "$(echo "$options" | dmenu "$@")"

@@ -1,0 +1,110 @@
+# -*- mode: sh -*-
+set -a
+
+silent() {
+  "$@" >/dev/null 2>&1
+}
+
+has() {
+  silent type "$@"
+}
+
+# duplication with ~/bin/iif is intentional
+# function call vs script means can use shell functions in condition
+iif() {
+  eval $1 >/dev/null && echo -n "${2-true}" || echo -n "${3-false}"
+}
+
+set_editor() {
+  export EDITOR="$@"
+  export GIT_EDITOR="$@"
+  export SVN_EDITOR="$@"
+}
+set_editor vim
+
+WINDOWS=$(iif "[ ! -n $(uname | awk '$1 ~ /MINGW|MSYS/ {print $1}') ]")
+
+# less status line
+LESS='-R -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
+LESSCHARSET='utf-8'
+
+BROWSER=qutebrowser
+FILEBROWSER=thunar
+VIEW_PDF=zathura
+
+if [ -z "$TERMINAL" ]; then
+  if $WINDOWS; then
+    TERMINAL=git-bash
+  elif has xst; then
+    TERMINAL=xst
+  elif has urxvt; then
+    TERMINAL=urxvt
+  fi
+fi
+
+# default
+GTK_THEME=${GTK_THEME:-adwaita}
+SXHKD_SHELL=sh
+MPDCRON_DIR="$HOME/.config/mpd"
+_JAVA_AWT_WM_NONREPARENTING=1
+LANG="en_US.UTF-8"
+TERMCMD="$TERMINAL"
+PAGER="less"
+
+# if has npm; then
+#   if has cache_output; then
+#     day="$(expr 60 \* 60 \* 24)"
+#     NODE_PATH="$(cache_output $day npm root -g)"
+#     PATH="$PATH:$(cache_output $day npm bin -g)"
+#   else
+#     NODE_PATH="$(npm root -g)"
+#     PATH="$PATH:$(npm bin -g)"
+#   fi
+# fi
+
+NODE_PATH="$HOME/.npm-packages/lib/node_modules"
+PATH="$PATH:$HOME/.npm-packages/bin"
+
+GEM_HOME="$HOME/.gem"
+BUNDLE_PATH="$HOME/.gem"
+GOPATH="$HOME/.go"
+
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+  . $HOME/.nix-profile/etc/profile.d/nix.sh; 
+fi 
+
+succ() {
+  PATH="$HOME/$@:$PATH"
+}
+
+XDG_CONFIG_HOME=$HOME/.config
+
+succ bin
+succ .gem/bin
+succ .go/bin
+succ .cargo/bin
+succ .wm/scripts/interact
+succ .wm/scripts/visual
+# pip --user location
+succ .local/bin
+
+# guix
+# succ .config/guix/current/bin
+# succ .guix-profile/bin
+# GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+# CPATH="$HOME/.guix-profile/include${CPATH:+:}$CPATH"
+# LIBRARY_PATH="$HOME/.guix-profile/lib${LIBRARY_PATH:+:}$LIBRARY_PATH"
+# PYTHONPATH="$HOME/.guix-profile/lib/python3.6/site-packages${PYTHONPATH:+:}$PYTHONPATH"
+
+
+REMOTE=false
+
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  REMOTE=true
+else
+  case $(ps -o comm= -p $PPID) in
+    sshd|*/sshd) REMOTE=true;;
+  esac
+fi
+
+set +a

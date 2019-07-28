@@ -1,0 +1,42 @@
+[global]
+    font = {{d_font}}
+    markup = full
+    format = "%s\n%b"
+    sort = yes
+    alignment = center
+    show_age_threshold = 60
+    geometry = "{{p_geometry}}"
+    idle_threshold = 60
+    follow = mouse
+    word_wrap = yes
+    history_length = 20
+    separator_height = {{b_border_width}}
+    padding = {{x_padding}}
+    horizontal_padding = {{x_padding}}
+    separator_color = frame
+    browser = {{BROWSER}}
+    icon_position = off
+    # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    frame_width = {{b_border_width}}
+    frame_color = "{{b_focused_border_color}}"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#{{p_bg_normal}}"
+    foreground = "#{{p_fg_normal}}"
+    timeout = 3
+
+[urgency_normal]
+    background = "#{{p_bg_normal}}"
+    foreground = "#{{p_fg_normal}}"
+    timeout = 0
+
+[urgency_critical]
+    background = "#{{p_bg_active}}"
+    foreground = "#{{p_fg_active}}"
+    timeout = 0

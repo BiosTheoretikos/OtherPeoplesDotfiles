@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# always run mpv w/ socket
+
+# sort here is a hack for emacs. /run/ comes after /home/.
+mpv="$(type -a mpv | sort | awk 'END{print $3}')"
+
+mpc pause >/dev/null
+
+$mpv --input-ipc-server=/tmp/mpvsocket "$@"

@@ -1,0 +1,33 @@
+# -*- mode: sh -*-
+
+alias getip="curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//'"
+alias grep="grep --color=auto"
+alias java='java -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+alias ls=' ls --color=auto'
+alias cd=' cd'
+alias pg=' pgrep'
+alias make=" clear; make"
+alias lsblk=" clear; lsblk"
+alias pacman="pacman --color=always"
+alias paste="curl -F 'file=-' http://0x0.st"
+alias steam-wine='WINEDEBUG=-all wine ~/.wine/drive_c/Program\ Files/Steam/Steam.exe >/dev/null 2>&1 &'
+
+# Make tmux assume 256 colors
+alias tmux='tmux -2'
+alias ref='theme refresh '
+alias e='$EDITOR '
+alias syncu='git push origin $(current_branch)'
+alias syncd='git pull origin $(current_branch)'
+
+alias xl='xrdb "$HOME/.Xresources"'
+
+alias syncd='git pull origin $(current_branch)'
+alias syncu='git push origin $(current_branch)'
+alias pdfgrep='pdfgrep --cache -n '
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+alias ds='dirs -v | head -n 10'

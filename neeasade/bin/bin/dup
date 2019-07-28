@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# the windows duplicate (#) thing
+# example: dmesg >$(dup out.txt)
+
+target="$1"
+while [[ -f "$target" ]]; do
+    file="$(basename -- "$target")"
+
+    if [[ "$file" == *.* ]]; then
+    	ext=".${file##*.}"
+	file="${file%.*}"
+    else
+	ext=""
+    fi
+
+    if [[ $file == *\) ]]; then
+	cur_num="$(grep -Eo "([0-9])" <<< "$file")"
+	cur_num=${cur_num/(}
+	cur_num=${cur_num/)}
+	next_num="$(($cur_num + 1))"
+
+	target="${file/(${cur_num})/(${next_num})}${ext}"
+    else
+	target="${file}_(1)${ext}"
+    fi
+done
+
+echo "$target"
