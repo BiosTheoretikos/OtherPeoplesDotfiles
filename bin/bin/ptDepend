@@ -1,0 +1,6 @@
+#!/bin/bash
+	
+prt-get depends `prt-get listinst` | grep "\[ \]"
+
+
+		

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# This script will invoke ping request to google, if network is reachable, it will invoke the next python script else, it will exit with no network .
+
+ping -c 1 google.com > /dev/null 2>&1 && python3 ~/.config/polybar/gmail/run.py || echo 
