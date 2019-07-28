@@ -1,1 +1,2 @@
 mathiasbynens	https://github.com/mathiasbynens/dotfiles.git
+atomantic	https://github.com/atomantic/dotfiles.git
