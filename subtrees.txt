@@ -16,3 +16,4 @@ bndabbs	https://github.com/bndabbs/dotfiles.git
 cristianpb	https://github.com/cristianpb/dotfiles.git
 rootbeersoup	https://github.com/rootbeersoup/dotfiles.git
 dikiaap	https://github.com/dikiaap/dotfiles.git
+dotphiles	https://github.com/dotphiles/dotphiles.git
