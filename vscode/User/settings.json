@@ -1,0 +1,89 @@
+{
+  // Internal
+  "editor.fontFamily": "Hack",
+  "editor.fontSize": 15,
+  "editor.rulers": [
+    80
+  ],
+  "editor.roundedSelection": false,
+  "editor.wordWrap": "on",
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never",
+  "editor.autoSurround": "never",
+  "editor.cursorBlinking": "solid",
+  "editor.minimap.enabled": false,
+  "editor.renderIndentGuides": true,
+  "editor.renderWhitespace": "all",
+  "editor.autoIndent": true,
+  "editor.lineNumbers": "off",
+  "workbench.editor.showTabs": false,
+  "workbench.sideBar.location": "right",
+  "workbench.activityBar.visible": false,
+  "workbench.statusBar.visible": false,
+  "workbench.commandPalette.preserveInput": false,
+  "workbench.colorTheme": "Squirrelsong Light",
+  "workbench.colorCustomizations": {
+    "statusBar.foreground": "#484848",
+    "statusBar.background": "#e5e5e5",
+    "statusBar.noFolderBackground": "#e5e5e5",
+    "editorWhitespace.foreground": "#ffffff44",
+    "editorIndentGuide.background": "#ffffff00",
+    "editorIndentGuide.activeBackground": "#dddddd88",
+  },
+  "window.openFilesInNewWindow": "off",
+  "window.openFoldersInNewWindow": "off",
+  "window.restoreWindows": "all",
+  "window.titleBarStyle": "native",
+  "window.zoomLevel": 0,
+  "explorer.openEditors.visible": 0,
+  "breadcrumbs.enabled": false,
+  "html.format.wrapLineLength": 0,
+  "html.autoClosingTags": false,
+  "extensions.autoUpdate": true,
+  "files.autoSave": "onWindowChange",
+  "files.hotExit": "onExitAndWindowClose",
+  "files.defaultLanguage": "markdown",
+  "files.associations": {
+    "*.pcss": "css",
+    "*.js.snap": "javascript",
+    ".prettierrc": "json"
+  },
+  "javascript.validate.enable": false,
+  "javascript.autoClosingTags": false,
+  "typescript.autoClosingTags": false,
+  "javascript.suggest.autoImports": false,
+
+  // Plugins
+  "color-highlight.matchWords": false,
+  "prettier.requireConfig": true,
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.formatOnSave": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+  ],
+  "spellright.notificationClass": "information",
+  "flow.useNPMPackagedFlow": true,
+  "cSpell.userWords": [
+    "Tamia"
+  ],
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

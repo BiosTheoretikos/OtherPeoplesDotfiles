@@ -1,0 +1,13 @@
+vscode/User/workspaceStorage/
+node_modules/
+*.cache
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.log
+.eslintcache
+vscode/User/globalStorage/state.vscdb
+vscode/User/globalStorage/state.vscdb.backup

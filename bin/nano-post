@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# Copies current opened in iA Writer file to my blog’s folder, adds YAML front matter and opens it in Code.
+#
+# Files should be named like this: `SomeName_En.md`, where `En` is file’s language: En or Ru.
+# Or in plain text (`Some Name`): English will be used by default.
+#
+# This script should be used from Alfred workflow.
+#
+# Author: Artem Sapegin, sapegin.me
+# License: MIT
+# https://github.com/sapegin/dotfiles
+#
+
+FILEPATH_PREFIX="$HOME/_/blog.sapegin.me/content/"
+FILEPATH_SUFFIX="/all/"
+FILEPATH_EXT=".md"
+DATE_FORMAT="%Y-%m-%d"
+
+# Common stuff
+function error() {
+	dlg-error "$1" "Nano"
+	exit 1
+}
+function ask() {
+	dlg-prompt "$1" "$2" "Nano"
+}
+
+# TODO: Check whether file has a name
+
+# Topmost opened in iA Writer file
+source_file=$(osascript -e 'tell application "iA Writer" to set filepath to file of document 1' -e 'POSIX path of filepath')
+source_name=$(basename "$source_file")
+
+# Language
+lang="en"
+
+# Default slug: convert CamelCase or plain text file name to under_score, strip language and extension
+slug=$(
+	echo "$source_name" |
+	perl -pe 's/\.md$//' |          # Remove extension
+	perl -pe 's/([A-Z])/-\l\1/g' |  # CamelCase to dashes
+	perl -pe 's/ /-/g' |            # Spaces to dashes
+	perl -pe 's/--/-/g' |           # Remove double spaces
+	perl -pe 's/^-//'               # Remove dash in the beginning
+)
+
+# Ask user to review the slug
+slug=$(ask "Post slug:" "$slug")
+if [ -z "$slug" ]; then
+	error "You need to enter a post slug."
+fi
+
+# Destination Markdown file path
+dest="$FILEPATH_PREFIX$lang$FILEPATH_SUFFIX$slug$FILEPATH_EXT"
+
+# Check dest file existence
+if [ -f "$dest" ]; then
+	error "Destination file $dest already exists."
+fi
+
+# Read post title
+title=$(grep -m 1 '#' "$source_file" | sed -e 's^# ^^')
+
+# Publishing date (today)
+date=$(date +"$DATE_FORMAT")
+
+# Copy template and source file to destination folder
+sed -e "s^{title}^$title^" -e "s^{date}^$date^" -e "s^{lang}^$lang^" "$HOME/dotfiles/bin/nano-post.tmpl" > "$dest"
+cat "$source_file" | perl -0pe 's/#.*\n//' >> "$dest"
+
+# Open the file in the editor ($EDITOR isn’t available in Alfred)
+code "$dest"
