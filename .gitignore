@@ -1,0 +1,11 @@
+ranger/config/ranger/bookmarks
+ranger/config/ranger/history
+ranger/config/ranger/tagged
+mutt/.mutt/alias
+mutt/.mutt/cache
+mutt/.mutt/mailboxes
+mpd/.mpd/mpd.db
+mpd/.mpd/mpd.pid
+mpd/.mpd/mpdstate
+ncmpcpp/.ncmpcpp/error.log
+APIs

@@ -1,0 +1,20 @@
+color status cyan default
+
+# Set folders
+set spoolfile = "+gmail/Inbox"
+set mbox = "+gmail/archives"
+set postponed = "+gmail/drafts"
+set record = "+gmail/sent"
+set trash = "+gmail/trash"
+
+set from = "felipebrokate@gmail.com"
+
+macro index <F3> "<enter-command>unset wait_key<enter><shell-escape>notify-send 'Sync gmail'; mbsync --quiet --quiet gmail | xargs notify-send 'Gmail synced' &<enter>" "run mbsync to sync mail for this account"
+
+# looks like you must explicitly do this to make sure you
+# don't save local copies of sent mail >:(
+unset record
+
+macro index,pager A \
+  "<save-message>+gmail/archives<enter>"  \
+  "move message to the archive"
