@@ -1,0 +1,6 @@
+SPDXVersion: SPDX-2.0
+Creator: John B. Wyatt IV
+PackageName: chef_dotfile_manager_tutorial
+PackageOriginator: John B. Wyatt IV
+PackageHomePage: https://gitlab.com/jbwyatt4/chef_dotfile_manager_tutorial
+PackageLicenseDeclared: Apache-2.0
