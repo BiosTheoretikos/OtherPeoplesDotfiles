@@ -13,3 +13,4 @@ awesome-dotfiles	https://github.com/webpro/awesome-dotfiles.git
 bashdot	https://github.com/bashdot/bashdot.git
 cowboy	https://github.com/cowboy/dotfiles.git
 bndabbs	https://github.com/bndabbs/dotfiles.git
+cristianpb	https://github.com/cristianpb/dotfiles.git
