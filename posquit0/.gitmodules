@@ -1,0 +1,45 @@
+[submodule "weechat/.weechat-plugins/wee-slack"]
+	path = weechat/.weechat-plugins/wee-slack
+	url = https://github.com/rawdigits/wee-slack.git
+[submodule "tools/dotbot"]
+	path = tools/dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "tools/ruby-build"]
+	path = tools/ruby-build
+	url = https://github.com/rbenv/ruby-build
+[submodule "tools/gef"]
+	path = tools/gef
+	url = https://github.com/hugsy/gef
+[submodule "tools/peda"]
+	path = tools/peda
+	url = https://github.com/longld/peda.git
+[submodule "tools/cask"]
+	path = tools/cask
+	url = https://github.com/cask/cask.git
+[submodule "tools/rbenv"]
+	path = tools/rbenv
+	url = https://github.com/rbenv/rbenv.git
+[submodule "tools/sqlmap"]
+	path = tools/sqlmap
+	url = https://github.com/sqlmapproject/sqlmap.git
+[submodule "tools/nvm"]
+	path = tools/nvm
+	url = https://github.com/creationix/nvm.git
+[submodule "X/.Xresources.d/xcolors"]
+	path = X/.Xresources.d/xcolors
+	url = https://github.com/tlatsas/xcolors.git
+[submodule "tools/fonts/powerline-fonts"]
+	path = tools/fonts/powerline-fonts
+	url = https://github.com/powerline/fonts.git
+[submodule "tools/dwm"]
+	path = tools/dwm
+	url = http://git.suckless.org/dwm
+[submodule "tools/fonts/nerd-fonts"]
+	path = tools/fonts/nerd-fonts
+	url = https://github.com/ryanoasis/nerd-fonts
+[submodule "zsh"]
+	path = zsh
+	url = https://github.com/posquit0/zshrc
+[submodule "tmux"]
+	path = tmux
+	url = https://github.com/posquit0/tmux-conf

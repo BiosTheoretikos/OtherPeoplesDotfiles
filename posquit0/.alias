@@ -1,0 +1,18 @@
+# .alias
+#
+# Maintained by Claud D. Park <posquit0.bj@gmail.com>
+# http://www.posquit0.com/
+
+
+# Set shortcut for opening .zshrc file
+alias zshconfig="editor ~/.zshrc"
+# Set shortcut for opening .oh-my-zsh directory
+alias ohmyzsh="editor ~/.oh-my-zsh"
+
+# Set tmux to support 256 color as default
+alias tmux="tmux -2"
+# Set weechat to use curses mode as default
+alias weechat="weechat-curses"
+
+# Convert JSON to pretty-print JSON
+alias prettyjson="python -m json.tool"

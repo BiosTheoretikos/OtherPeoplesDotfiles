@@ -1,0 +1,36 @@
+servers = (
+  {
+    address = "chat.freenode.net";
+    chatnet = "Freenode";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  Freenode = { type = "IRC"; autosendcmd = "/join #pwnable.kr"; };
+};
+
+channels = (
+  { name = "#pwnable.kr"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#irssi"; chatnet = "Freenode"; autojoin = "No"; }
+);
+
+aliases = { };
+
+settings = {
+  core = {
+    real_name = "Posquit0.BJ";
+    user_name = "posquit0";
+    nick = "posquit0";
+    timestamp_format = "%m/%d %H:%M:%S";
+  };
+  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = {
+    theme = "molokai";
+    hilight_color = "= %R";
+
+  };
+};
