@@ -9,3 +9,4 @@ MrPickles	https://github.com/MrPickles/dotfiles.git
 andschwa	https://github.com/andschwa/dotfiles.git
 sapegin	https://github.com/sapegin/dotfiles.git
 ashishb	https://github.com/ashishb/dotfiles.git
+awesome-dotfiles	https://github.com/webpro/awesome-dotfiles.git
