@@ -28,3 +28,4 @@ statico	https://github.com/statico/dotfiles.git
 jbwyatt4	https://gitlab.com/jbwyatt4/chef_dotfile_manager_tutorial.git
 jeffaco	https://github.com/jeffaco/dotfiles.git
 jh3y	https://github.com/jh3y/kody.git
+JDevlieghere	https://github.com/JDevlieghere/dotfiles.git
