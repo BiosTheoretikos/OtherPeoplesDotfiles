@@ -36,3 +36,4 @@ mihaliak	https://github.com/mihaliak/dotfiles.git
 mohitsinghs	https://github.com/mohitsinghs/dotfiles.git
 neeasade	https://github.com/neeasade/dotfiles.git
 nelsonmestevao	https://github.com/nelsonmestevao/dotfiles.git
+nicksp	https://github.com/nicksp/dotfiles.git
