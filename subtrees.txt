@@ -25,3 +25,4 @@ Kraymer	https://github.com/Kraymer/F-dotfiles.git
 volny	https://github.com/volny/dotconfig.git
 huyvohcmc	https://github.com/huyvohcmc/dotfiles.git
 statico	https://github.com/statico/dotfiles.git
+jbwyatt4	https://gitlab.com/jbwyatt4/chef_dotfile_manager_tutorial.git
