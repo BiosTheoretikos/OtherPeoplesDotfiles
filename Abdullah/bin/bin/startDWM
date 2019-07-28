@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+$HOME/.config/polybar/launch.sh &
+xbacklight = 5 &
+pactl set-source-mute auto_null.monitor true & 
+$HOME/.fehbg &
+xset dpms 180 & 
+xss-lock -- i3lock -c 000000 & 

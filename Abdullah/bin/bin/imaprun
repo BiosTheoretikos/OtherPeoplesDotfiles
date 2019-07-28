@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+
+
+#  ▓▓▓▓▓▓▓▓▓▓ 
+# ░▓ Author ▓ Abdullah <https://abdullah.today/> 
+# ░▓▓▓▓▓▓▓▓▓▓ 
+# ░░░░░░░░░░ 
+
+# This script will be run through cron and will notify us for new mails.
+
+offlineimap -o -q -u quiet
+
+dir1="$HOME/.mail/abdullah/INBOX/new/"
+newmails="$(find $dir1 -type f | wc -l)"
+
+dir2="$HOME/.mail/abdullah/INBOX/cur/"
+oldmails="$(find $dir2 -type f | wc -l)"
+
+if [ $newmails -gt 0 ]; then
+    export DISPLAY=:0; export XAUTHORITY=$HOME/.Xauthority;
+    notify-send "OfflineIMAP" "New Mail! New: $newmails Old: $oldmails"; 
+    canberra-gtk-play -f ~/bin/music4scripts/missile.ogg  
+
+fi

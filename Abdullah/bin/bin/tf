@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+figlet -f big "$1" | lolcat

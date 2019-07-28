@@ -1,0 +1,7 @@
+#!/bin/sh
+	
+
+sbsign --key /root/sb/db.key --cert /root/sb/db.crt --output /boot/vmlinuz /boot/vmlinuz 
+
+
+		

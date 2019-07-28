@@ -1,0 +1,193 @@
+###########################
+# xbindkeys configuration #
+###########################
+#
+# Version: 0.1.3
+#
+# If you edit this, do not forget to uncomment any lines that you change.
+# The pound(#) symbol may be used anywhere for comments.
+#
+# A list of keys is in /usr/include/X11/keysym.h and in
+# /usr/include/X11/keysymdef.h 
+# The XK_ is not needed. 
+#
+# List of modifier (on my keyboard): 
+#   Control, Shift, Mod1 (Alt), Mod2 (NumLock), 
+#   Mod3 (CapsLock), Mod4, Mod5 (Scroll). 
+#
+# Another way to specifie a key is to use 'xev' and set the 
+# keycode with c:nnn or the modifier with m:nnn where nnn is 
+# the keycode or the state returned by xev 
+#
+# This file is created by xbindkey_config 
+# The structure is : 
+# # Remark 
+# "command" 
+# m:xxx + c:xxx 
+# Shift+... 
+
+
+
+
+#keystate_numlock = enable
+#keystate_scrolllock = enable
+#keystate_capslock = enable
+
+
+
+#dance
+#"$HOME/bin/dance"
+#    m:0x8 + c:40
+#    Alt + d 
+
+#Terminal
+"termite"
+    m:0x40 + c:36
+    Mod4 + Return 
+
+# Termite
+#"termite"
+#    m:0x8 + c:36
+#    Alt + Return 
+
+#music
+"$HOME/bin/music"
+    m:0x40 + c:56
+    Mod4 + b 
+
+#browser
+"google-chrome-stable"
+    m:0x8 + c:25
+    Shift+Alt + w 
+
+#lock
+#"$HOME/bin/lock"
+#    m:0x40 + c:53
+#    Mod4 + x 
+
+#Brightness Up
+#"xbacklight + 5"
+#    m:0x0 + c:233
+#    XF86MonBrightnessUp 
+
+#Brightness Down
+#"xbacklight - 5"
+#    m:0x0 + c:232
+#    XF86MonBrightnessDown 
+
+#Volume Up
+#"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+#    m:0x0 + c:123
+#    XF86AudioRaiseVolume 
+
+#Volume Down
+#"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+#    m:0x0 + c:122
+#    XF86AudioLowerVolume 
+
+#Mute
+#"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+#    m:0x0 + c:121
+#    XF86AudioMute 
+
+#Volume UP extra
+"~/bin/pavolume.sh --up"
+    m:0x9 + c:21
+    Shift+Alt + equal 
+
+#Screeenshot
+"import -window root /tmp/foo.png"
+    m:0x0 + c:107
+    Print 
+
+#Seek Forward Song lil
+"mpc seek +10"
+    m:0x8 + c:35
+    Alt + bracketright 
+
+#Seek Forward Song
+"mpc seek +120"
+    m:0x9 + c:35
+    Shift+Alt + bracketright 
+
+#Seek Backward Song lil
+"mpc seek -10"
+    m:0x8 + c:34
+    Alt + bracketleft 
+
+#Seek Backward Song
+"mpc seek -120"
+    m:0x9 + c:34
+    Shift+Alt + bracketleft 
+
+#Next Song
+#"mpc next"
+#    m:0x8 + c:57
+#    Alt + n 
+
+
+#Previous Song
+#"mpc prev"
+#    m:0x8 + c:33
+#    Alt + p 
+
+#Webcam
+"$HOME/bin/mywebcam"
+    m:0x40 + c:54
+    Mod4 + c 
+
+#PDF Reader
+#"evince"
+#    m:0x8 + c:26
+#    Alt + e 
+
+#mail
+#"~/bin/music-preview-permanent"
+#    m:0x40 + c:58
+#    Mod4 + m 
+
+#ranger
+#"urxvtc -e ranger"
+#    m:0x8 + c:27
+#    Alt + r 
+
+#ncmpcpp
+#"$TERMINAL -T music -e ncmpcpp -s visualizer"
+#    m:0x8 + c:58
+#    Alt + m 
+
+#htop
+#"$TERMINAL -e htop"
+#    m:0x8 + c:43
+#    Alt + h 
+
+#FileManager
+#"urxvtc -e ranger"
+#    m:0x0 + c:152
+#    XF86Explorer 
+
+#Remark
+#"google-chrome-stable"
+#    m:0x0 + c:128
+#    XF86LaunchA 
+
+#Remark
+#"terminator"
+#    m:0x9 + c:28
+#    Shift+Alt + t 
+
+#Kill Focused Window
+#"xdotool getwindowfocus windowkill"
+#    m:0x40 + c:24
+#    Mod4 + q 
+#"xdotool getwindowfocus windowkill"
+#    m:0x40 + c:24
+#    Mod4 + q 
+
+#Kill all windows 
+#"~/bin/killAllWindows"
+#    m:0x41 + c:24
+#    Shift+Mod4 + q 
+
+#
+# End of xbindkeys configuration
