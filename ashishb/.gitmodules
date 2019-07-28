@@ -1,0 +1,33 @@
+[submodule "vundle"]
+	path = _vim/bundle/vundle
+	url = https://github.com/gmarik/vundle.git
+[submodule "jedi"]
+	path = _vim/bundle/jedi-vim/jedi
+	url = https://github.com/davidhalter/jedi.git
+[submodule "vim-fugitive"]
+	path = _vim/bundle/vim-fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "syntastic"]
+	path = _vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "_vim/bundle/vim-snipmate"]
+	path = _vim/bundle/vim-snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "vim-addon-mw-utils"]
+	path = _vim/bundle/vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "tlib_vim"]
+	path = _vim/bundle/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim-snippets"]
+	path = _vim/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
+[submodule "bashrc_includes/z"]
+	path = bashrc_includes/z
+	url = https://github.com/rupa/z
+[submodule "bashrc_includes/maven-bash-completion"]
+	path = bashrc_includes/maven-bash-completion
+	url = https://github.com/juven/maven-bash-completion
+[submodule "bashrc_includes/yarn-completion"]
+	path = bashrc_includes/yarn-completion
+	url = https://github.com/dsifford/yarn-completion

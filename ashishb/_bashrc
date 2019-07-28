@@ -1,0 +1,80 @@
+# vi: ft=sh
+#### Bash customization. ####
+export EDITOR="vim"
+export PS1="\w $ "
+export CLICOLOR=yes     # Enable color ls output
+export TERM=xterm-color # Flag terminal as color-capable
+export GREP_OPTIONS='--color=auto'
+# Ref: http://excid3.com/blog/how-to-fix-esc-in-your-terminal/#.UkHeamSZ3d6
+export LESS="-eirMX"
+# Enable X11 tunneling through ssh
+if [ -z $DISPLAY ]; then export DISPLAY=":0.0"; fi
+export P4DIFF=vimdiff p4 diff  # Use vimdiff for P4 diff.
+
+#### Add some paths to $PATH. ####
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BASHRC_INCLUDES=$DIR/bashrc_includes
+export PATH=$PATH:$DIR/scripts
+
+# A function to change title (works in iTerm).
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
+#### Source more scripts. ####
+# Bash history customizations.
+source $BASHRC_INCLUDES/bash_history_customization.bash
+
+# For homebrew on Mac.
+if [[ `uname -s` == "Darwin" ]]; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+      . $(brew --prefix)/etc/bash_completion
+  fi
+fi
+
+# Disable homrew analytics (https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md)
+HOMEBREW_NO_ANALYTICS=1
+# Disable Gatekeeper's quarantine - https://github.com/Homebrew/homebrew-cask/issues/52128#issuecomment-422436221
+HOMEBREW_CASK_OPTS=--no-quarantine
+
+alias start_web_server="echo Starting webserver at http://$(ipconfig getifaddr en0):8000 && python -m SimpleHTTPServer 8000"
+
+# Hide Java icon (https://bia.is/android-dev-tip-hide-that-annoying-java-icon/)
+export JAVA_TOOL_OPTIONS="-Dapple.awt.UIElement=true"
+
+# Due to some issue, this produces "nospace: unbound variable" under `set -o nounset`.
+# Therefore, I have to put it outside that.
+if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+  . /usr/local/share/bash-completion/bash_completion
+fi
+# Ref: http://robertmuth.blogspot.com/2012/08/better-bash-scripting-in-15-minutes.html
+set -o nounset
+# Better auto complete.
+source $BASHRC_INCLUDES/better_autocomplete.bash
+# Not required anymore - brew auto-completion (if brew is present).
+# command brew help 1>/dev/null 2>&1 && source `brew --repository`/Library/Contributions/brew_bash_completion.sh
+# adb auto-completion.
+source $BASHRC_INCLUDES/adb.bash
+# git auto-completion.
+source $BASHRC_INCLUDES/git-completion.bash
+# p4 auto-completion
+source $BASHRC_INCLUDES/p4_autocomplete.bash
+# gradle auto-completion
+source $BASHRC_INCLUDES/gradle_autocomplete.bash
+# Maven (mvn) auto-completion.
+source $BASHRC_INCLUDES/maven-bash-completion/bash_completion.bash
+# Yarn auto-completion
+source $BASHRC_INCLUDES/yarn-completion/yarn-completion.bash
+# Custom aliases to improve productivity.
+source $BASHRC_INCLUDES/custom_aliases.bash
+# Custom aliases for android reverse engineering.
+source $BASHRC_INCLUDES/android_reverse_engineering_related_aliases.bash
+# Source local aliases.
+touch $BASHRC_INCLUDES/local_aliases.bash && source $BASHRC_INCLUDES/local_aliases.bash
+set +o nounset
+
+# Keep these two files out of nounset (I will fix them some day).
+# An interesting bash prompt.
+source $BASHRC_INCLUDES/50_prompt.bash
+# Source 'z' - easy jumping around without providing full path names.
+source $BASHRC_INCLUDES/z/z.sh
