@@ -1,0 +1,177 @@
+ZSH=$HOME/.oh-my-zsh
+
+# Set zsh theme to be powerlevel10k with patched fontawesome symbols.
+POWERLEVEL9K_MODE='nerdfont-complete'
+ZSH_THEME='powerlevel10k/powerlevel10k'
+
+plugins=(
+  git
+  bundler
+  brew
+  gem
+  history-substring-search
+  colored-man-pages
+  vi-mode
+)
+
+# Returns whether the given command is executable or aliased.
+_has() {
+  return $(whence $1 >/dev/null)
+}
+
+# Prepend a directory to path, if it exists and isn't already in the path.
+_prepend_to_path() {
+  if [ -d $1 -a -z ${path[(r)$1]} ]; then
+    path=($1 $path);
+  fi
+}
+
+# Append a directory to path, if it exists and isn't already in the path.
+_append_to_path() {
+  if [ -d $1 -a -z ${path[(r)$1]} ]; then
+    path=($path $1);
+  fi
+}
+
+_prepend_to_path /usr/local/bin
+_prepend_to_path $HOME/.local/bin
+
+export EDITOR='vim'
+
+DISABLE_UPDATE_PROMPT=true
+
+# for Homebrew installed rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+bindkey -v # vi mode for shell
+bindkey -e # enable C-x-e for shell editor
+# key bindings for history search
+bindkey '\e[3~' delete-char
+bindkey '^R' history-incremental-search-backward
+
+setopt correct
+setopt rmstarsilent # silence rm * confirmation
+
+# Use 256 color for tmux.
+alias tmux="TERM=screen-256color-bce tmux"
+
+# Explicity bind home and end keys (in case of terminal compatibility issues)
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+
+if [[ -z "$TMUX" ]]; then
+  export TERM="xterm-256color"
+fi
+
+# Powerlevel10k configs.
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  os_icon
+  context
+  vcs
+  dir_writeable
+  dir
+)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+  command_execution_time
+  status
+  root_indicator
+  background_jobs
+  battery
+  time
+  vi_mode
+)
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+POWERLEVEL9K_TIME_FORMAT='%D{%l:%M %p}'
+POWERLEVEL9K_TIME_BACKGROUND='purple'
+
+POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='black'
+POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND='cyan'
+POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND='black'
+POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND='green'
+
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+
+POWERLEVEL9K_BATTERY_VERBOSE=false
+
+# Source local version of zshrc.
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
+
+# Source Oh-My-ZSH.
+source $ZSH/oh-my-zsh.sh
+
+# Update completion scripts (which should be defined by homebrew and oh-my-zsh).
+rm -f ~/.zcompdump && compinit
+
+# Configure fzf (if available).
+if _has fzf; then
+  # Source fzf key bindings and auto-completion.
+  if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
+    # Source fzf scripts via Homebrew.
+    source /usr/local/opt/fzf/shell/key-bindings.zsh
+    source /usr/local/opt/fzf/shell/completion.zsh
+  elif [ -e /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+  elif [ -e ~/.fzf ]; then
+    # Source fzf scripts via via local installation.
+    _append_to_path ~/.fzf/bin
+    source ~/.fzf/shell/key-bindings.zsh
+    source ~/.fzf/shell/completion.zsh
+  elif [ -f ~/.fzf.zsh ]; then
+    # Auto-generated completion script when installing from custom path.
+    source ~/.fzf.zsh
+  fi
+
+  if _has fd; then
+    # Use fd for fzf.
+    export FZF_DEFAULT_COMMAND='fd --type f --follow --hidden'
+    # Use fd for fzf directory search.
+    export FZF_ALT_C_COMMAND='fd --type d --color never'
+  elif _has rg; then
+    # Use ripgrep for fzf.
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+  fi
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+  # Source fzf-cd plugin.
+  if [[ -f ~/.zsh-interactive-cd.plugin.zsh ]]; then
+    source ~/.zsh-interactive-cd.plugin.zsh
+  fi
+
+  # Display source tree and file preview for CTRL-T and ALT-C.
+  if _has tree; then
+    # Show subdir tree for directories.
+    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+  fi
+
+  # Bind alt-j/k/d/u to moving the preview window for fzf.
+  export FZF_DEFAULT_OPTS="--bind alt-k:preview-up,alt-j:preview-down,alt-u:preview-page-up,alt-d:preview-page-down"
+
+  # Show previews for files and directories.
+  # Having `bat` or `highlight` (or any of the other binaries below) installed
+  # enables syntax highlighting.
+  export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -200'"
+
+  if _has bat; then
+    # Export theme for http://github.com/sharkdp/bat.
+    export BAT_THEME="TwoDark"
+  fi
+fi
+
+# Alias hub and git, such that we can use hub commands with git.
+if _has hub; then
+  eval "$(hub alias -s)"
+fi
+
+# Dircolors must be set last, since oh-my-zsh seems to rewrite those values.
+if [[ "$(uname -s)" == "Linux" ]]; then
+  eval `dircolors ~/.dircolors.256dark`;
+else
+  export LSCOLORS='ExFxBxDxCxegedabagacad'
+fi
