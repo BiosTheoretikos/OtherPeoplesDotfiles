@@ -1,0 +1,81 @@
+# ---------------------------------------
+# skhdrc
+# ---------------------------------------
+
+# --grid-layout guide
+#
+# X:Y:A:B:C:D
+#
+# X:Y defines the rows:columns of the virtual grid
+#
+# A:B defines the placement of the window on the grid
+#   1:0 places window in topmost row and 2nd leftmost column
+#
+# C:D defines the size of the window
+#   2:1 would resize the window to 2 times width and 1 times height
+#   of the grid defined in X:Y
+
+
+# Change tiling mode of desktop
+alt + cmd - b : chunkc tiling::desktop --layout bsp
+alt + cmd - n : chunkc tiling::desktop --layout float
+
+
+### BSP mode shortcuts ###
+
+# Detach focused window from bsp
+alt - d : chunkc tiling::window --toggle float
+
+# Increase/decrease window size
+alt + cmd - h : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west\
+                chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge east
+alt + cmd - j : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge south\
+                chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge north
+alt + cmd - k : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge north\
+                chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge south
+alt + cmd - l : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge east\
+                chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge west
+
+# Warp focused container
+alt - h : chunkc tiling::window --warp west
+alt - j : chunkc tiling::window --warp south
+alt - k : chunkc tiling::window --warp north
+alt - l : chunkc tiling::window --warp east
+
+# Make focused window the largest
+alt - m : chunkc tiling::window --warp biggest
+
+# Increase/decrease padding
+alt + cmd - p : chunkc tiling::desktop --padding inc
+alt + cmd - o : chunkc tiling::desktop --padding dec
+
+# Increase/decrease gap between windows
+alt + cmd - v : chunkc tiling::desktop --gap inc
+alt + cmd - c : chunkc tiling::desktop --gap dec
+
+# Change focused window
+alt - w : chunkc tiling::window --focus next
+
+# Rotate window arrangement 90 degrees
+alt + cmd - r : chunkc tiling::desktop --rotate 90
+
+# Rotate window arrangement 180 degrees (flip)
+alt + cmd - f : chunkc tiling::desktop --rotate 180
+
+# Equalize size of windows
+alt + cmd - e : chunkc tiling::desktop --equalize
+
+# Toggle split
+alt + cmd - x : chunkc tiling::window --toggle split
+
+
+### Float mode shortcuts ###
+
+# Make focused window fill screen
+alt + cmd - m : chunkc tiling::window --grid-layout 1:1:0:0:1:1
+
+# Move focused window to center (mainly to set iTerm hotkey window)
+alt + cmd - g : chunkc tiling::window --grid-layout 7:9:2:2:5:3
+
+# Move focused window to middle (ideal readability)
+alt + cmd - t : chunkc tiling::window --grid-layout 5:5:1:0:3:5
