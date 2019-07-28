@@ -44,3 +44,4 @@ ridhwaans	https://github.com/ridhwaans/dotfiles.git
 rkalis	https://github.com/rkalis/dotfiles.git
 xero	https://github.com/xero/dotfiles.git
 skwp	https://github.com/skwp/dotfiles.git
+holman	https://github.com/holman/dotfiles.git
