@@ -1,0 +1,54 @@
+variables: variables.yml
+
+tasks:
+  SEARCH:
+    priority: 1
+
+    discover:
+      what:
+        - next_series_episodes: yes
+      from:
+        - nyaa:
+            category: anime eng
+            filter: trusted only
+
+      release_estimations: ignore
+      interval: 25 minutes
+
+    series:
+      settings:
+        ENTRIES:
+          quality: 1080p
+          identified_by: sequence
+          from_group: HorribleSubs
+      ENTRIES:
+        # - <anime-name-here>
+
+    transmission:
+      host: localhost
+      port: 9091
+      username: '{? transmission.username ?}'
+      password: '{? transmission.password ?}'
+
+    exec:
+      allow_background: yes
+      auto_escape: yes
+      on_output:
+        for_accepted:
+          - notify
+            --title 'flexget'
+            --subtitle '{{series_name}}'
+            --message 'EP{{series_id}} has been captured into transmission.'
+            &
+
+  CLEAN:
+    priority: 2
+
+    clean_transmission:
+      host: localhost
+      port: 9091
+      username: '{? transmission.username ?}'
+      password: '{? transmission.password ?}'
+      tracker: nyaa
+
+    disable: details

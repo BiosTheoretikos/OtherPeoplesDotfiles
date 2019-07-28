@@ -1,0 +1,33 @@
+# Set basic information.
+set my_email = 'me@kutsankaplan.com'
+set from = $my_email
+set realname = 'Kutsan Kaplan'
+
+# Set location of the mailbox.
+set folder = '~/.mutt/mailbox/com.kutsankaplan'
+
+# Set spool file.
+set spoolfile = '+Inbox'
+
+# Send email via SMTP with msmtp.
+set sendmail = "msmtp --file=$HOME/.mutt/msmtprc --account=com.kutsankaplan"
+
+# Cache databases.
+set header_cache = '~/.mutt/cache/com.kutsankaplan/headers'
+set message_cachedir = '~/.mutt/cache/com.kutsankaplan/bodies'
+
+# The file where the trusted certificates are saved.
+set certificate_file = '~/.mutt/cache/com.kutsankaplan/certificates'
+
+# Custom statusbar.
+set status_format = "  com.kutsankaplan   %f[%r] %>  %?M?%M/?%m messages, %?n?%n new, ?%?d?%d deleted, ?%?F?%F important, ?%?t?%t selected, ?%?p?%p drafts, ?%l "
+
+# Load mailboxes.
+unmailboxes *
+mailboxes \
+	"+Inbox" \
+	"+Drafts" \
+	"+Templates" \
+	"+Sent" \
+	"+Spam" \
+	"+Trash"
