@@ -1,0 +1,30 @@
+# vim: set foldmethod=marker:
+# .screenrc
+#
+# Maintained by Claud D. Park <posquit0.bj@gmail.com>
+# http://www.posquit0.com/
+
+
+# General {{{
+# ===========
+  # Disable the startup message
+  startup_message off
+  # Automatically detach all screens on accidental hangup
+  autodetach on
+  # Set a large scrollback buffer
+  defscrollback 32000
+  # Always start `screen` with UTF-8 enabled (`screen -U`)
+  defutf8 on
+# }}}
+
+# Key Bindings {{{
+# ================
+  # Reloads .screenrc
+  bind R eval "source ~/.screenrc"
+# }}}
+
+# Appereance {{{
+# ==============
+  # Set the terminal color to 256color
+  term "screen-256color"
+# }}}

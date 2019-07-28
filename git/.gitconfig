@@ -1,0 +1,93 @@
+# vim: set ft=gitconfig:
+# .gitconfig
+#
+# Maintained by Claud D. Park <posquit0.bj@gmail.com>
+# http://www.posquit0.com/
+
+
+[include]
+  # include external gitconfig file (requires git 1.7.10+)
+  # typically, user.name and user.email is configured.
+  path = ~/.gitconfig.local
+[push]
+  # push should only push current branch, not all branches
+  default = current
+[help]
+  autocorrect = 1
+
+[core]
+	editor = vim
+[merge]
+  tool = vimdiff
+
+[format]
+  pretty = fuller
+[color]
+  ui = auto
+  interactive = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green 
+[color "diff"]
+  commit = green bold
+  meta = green bold
+  frag = green bold
+  func = green
+  plain = yellow
+  old = red
+  new = cyan
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[alias]
+  ls      = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  last    = log -1 HEAD
+  today   = log --since=midnight --color --graph \
+            --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+            --abbrev-commit
+  yesterday = log --since yesterday --until=midnight --color --graph \
+            --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+            --abbrev-commit
+  history = log --graph --pretty=format:'%C(yellow)%h%Creset \
+            -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' \
+            --abbrev-commit --date=short --date-order -n30
+
+  remotes = remote -v
+  df      = diff
+
+  branches = branch -a
+  unstage = reset HEAD --
+  discard = checkout --
+  co      = checkout
+  com     = checkout master
+
+  amend   = commit --amend
+  ca      = commit --amend
+  cm      = commit -m
+
+  s       = status --short --branch
+  st      = status
+  sta     = status --short --branch --untracked-files=normal
+
+  sync    = !git pull && git push
+  ta      = tag -a
+  tags    = tag -l
+
+# allows: git clone github:rails/rails
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+  insteadOf = "github:"
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+[url "git@heroku.com:"]
+  insteadOf = "heroku:"

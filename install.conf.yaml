@@ -1,0 +1,133 @@
+- clean: ['~']
+
+- shell:
+  - [sleep 0, Installing Posquit0's dotfiles]
+  -
+    command: [git pull, Updating dotfiles]
+    stdout: true
+    stderr: true
+  -
+    command: [git submodule update --init --recursive --quiet, Installing submodules]
+    stdout: true
+    stderr: true
+
+- link:
+    ~/.tools:
+      force: true
+      path: tools/
+    ~/.bin:
+      force: true
+      path: bin/
+    ~/.alias: .alias
+    ~/.ctags:
+      force: true
+      path: ctags/.ctags
+    ~/.curlrc:
+      relink: true
+      path: curl/.curlrc
+    ~/.gemrc:
+      relink: true
+      path: ruby/.gemrc
+    ~/.rbenv/plugins/ruby-build:
+      create: true
+      path: tools/ruby-build/
+    ~/.gdbinit: gdb/.gdbinit
+    ~/.gitconfig:
+      force: true
+      path: git/.gitconfig
+    ~/.gitconfig.local: git/.gitconfig.local
+    ~/.irssi: irssi/.irssi
+    ~/.jshintrc: node/.jshintrc
+    ~/.npmrc: node/.npmrc
+    ~/.octaverc: octave/.octaverc
+    ~/.screenrc: screen/.screenrc
+    ~/.ssh:
+      relink: true
+      path: ssh/.ssh/
+    ~/.tmux:
+      force: true
+      path: tmux
+    ~/.tmux.conf:
+      force: true
+      path: tmux/tmux.conf
+    ~/.weechat:
+      relink: true
+      path: weechat/.weechat/
+    ~/.weechat-plugins:
+      relink: true
+      path: weechat/.weechat-plugins/
+    ~/.wgetrc:
+      relink: true
+      path: wget/.wgetrc
+    ~/.vim:
+      force: true
+      path: vim/.vim/
+    ~/.vimrc:
+      force: true
+      path: vim/.vimrc
+    ~/.zsh:
+      force: true
+      path: zsh
+    ~/.zshenv:
+      force: true
+      path: zsh/zshenv
+    ~/.zshrc:
+      force: true
+      path: zsh/zshrc
+    ~/.xinitrc:
+      relink: true
+      path: X/.xinitrc
+    ~/.Xresources:
+      force: true
+      path: X/.Xresources
+    ~/.Xresources.d:
+      force: true
+      path: X/.Xresources.d/
+    ~/.Xmodmap:
+      force: true
+      path: X/.Xmodmap
+    ~/.wallpaper:
+      relink: true
+      path: X/.wallpaper/
+    ~/.icons:
+      relink: true
+      path: X/.icons/
+    ~/.dwm:
+      force: true
+      path: dwm/
+    tools/dwm/config.h:
+      force: true
+      path: dwm/config.h
+    ~/.vnc:
+      force: true
+      path: X/.vnc/
+    ~/.config/i3lock:
+      force: true
+      path: X/.config/i3lock/
+    ~/.xpra:
+      force: true
+      path: X/.xpra/
+
+- shell:
+  - tmux start-server
+  - tmux new-session -d
+  -
+    command: [~/.tmux/plugins/tpm/scripts/install_plugins.sh, Installing TMUX plugins]
+    stdout: true
+    stderr: true
+  - tmux kill-server
+  -
+    command: [vim +PlugInstall +qall now, Installing Vim plugins]
+    stdin: true
+    stdout: true
+    stderr: true
+  -
+    command: [~/.tools/fonts/install.sh, Installing fonts(Powerline, Nerd and more)]
+    stdin: true
+    stdout: true
+    stderr: true
+  -
+    command: [make dwm --directory=~/.tools/dwm, Installing DWM(Dynamic Window Manager)]
+    stdin: true
+    stdout: true
+    stderr: true
