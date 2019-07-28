@@ -30,3 +30,4 @@ jeffaco	https://github.com/jeffaco/dotfiles.git
 jh3y	https://github.com/jh3y/kody.git
 JDevlieghere	https://github.com/JDevlieghere/dotfiles.git
 kvendrik	https://github.com/kvendrik/dotfiles.git
+kutsan	https://github.com/kutsan/dotfiles.git
