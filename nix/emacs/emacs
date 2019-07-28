@@ -1,0 +1,115 @@
+;; Useful reminders
+;;   To describe a variable:	C-h v
+
+;; First of all - skip the copyright message
+(setq inhibit-startup-message t)
+(setq enable-recursive-minibuffers  t)
+
+;; Define function to ask before exiting
+(defun ask-before-exiting ()
+  "Ask for confirmation before exiting emacs."
+  (interactive)
+  (cond ((y-or-n-p "Really quit emacs? ") (save-buffers-kill-emacs))
+	(t (message "Nope."))))
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+ '(case-fold-search t)
+ '(current-language-environment "UTF-8")
+ '(default-input-method "rfc1345")
+ '(delete-selection-mode nil nil (delsel))
+ '(global-font-lock-mode t nil (font-lock))
+ '(scroll-bar-mode (quote right))
+ '(show-paren-mode t nil (paren)))
+
+(custom-set-faces
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+ )
+
+(transient-mark-mode 1)
+
+(require 'cc-mode)
+(add-hook 'c-mode-common-hook
+	  '(lambda()
+             ;; Use bsd style
+             (c-set-style "bsd")
+             ;; Want some more text on each line (for e.g. Esc-Q)
+             (setq fill-column 76)
+             ;; To be compatilbe with VC++
+	     (c-set-offset 'case-label 4)
+             (setq c-basic-offset 4)
+	     (c-set-offset 'statement-cont 0)
+;            (define-key ctrl-map "[" 'c-beginning-of-statement)
+;            (define-key ctrl-map "]" 'c-end-of-statement)
+             ;; Bind Esc-M to man in c-mode (normally back-to-indentation)
+             (local-set-key "\M-m" 'man)
+             (local-set-key "\M-n" 'next-error) ;goto-next-error-in-other-buffer
+             (local-set-key "\M-e" 'call-last-kbd-macro)
+             ;; Auto-newline
+             (c-toggle-auto-state -1)
+             ;; Also use spaces instead of tabs
+               ;;(add-hook 'local-write-file-hooks
+	       ;;          '(lambda() 
+	       ;; 	  (untabify (point-min) (point-max))))
+	     (setq-default indent-tabs-mode nil)
+             ;; Display function/method name in status line
+             (which-function-mode 1)
+             ;; Don't want line-wrapping when printing code
+					;(make-local-variable 'ps-number-of-columns)
+             (setq ps-number-of-columns 1)
+					;(setq c-font-lock-extra-types (append c-font-lock-extra-types '("Bool_")))
+					;(setq c++-font-lock-extra-types (append c++-font-lock-extra-types '("Bool_")))
+					;(setq c++-font-lock-extra-types (append c++-font-lock-extra-types '("OpString")))
+             ))
+
+;; Various customizations
+
+(setq blink-cursor-mode 0)
+
+(setq column-number-mode t)
+(setq line-number-mode t)
+
+(setq-default cperl-continued-statement-offset 4)
+(setq-default cperl-indent-level 4)
+
+;; Set up a few key definitions
+
+(global-set-key "\C-b" 'compile)
+(set 'compile-command "cd ~/dev/build && make install-tools")
+
+(global-set-key [f1]		'goto-line)
+(global-set-key [home]		'beginning-of-line)
+(global-set-key [C-home]	'beginning-of-buffer)
+(global-set-key [end]		'end-of-line)
+(global-set-key [C-end]		'end-of-buffer)
+
+(global-set-key "\C-X\C-C"	'ask-before-exiting)
+
+(put 'erase-buffer 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;; Bind Esc-g to goto-line
+(define-key	esc-map "g"	'goto-line)
+
+;; Bind Esc-r to revert-buffer
+(define-key	esc-map "r"	'revert-buffer-noconf)
+(defun revert-buffer-noconf ()
+  (interactive)
+  (revert-buffer nil t))
+
+;; Make golint available for go language
+;(add-to-list 'load-path (concat (getenv "HOME")  "/go/src/golang.org/x/lint/misc/emacs"))
+;(require 'golint)
+
+;; 
+;; Query-replace - inserting newline: 
+;;  M-% oldstring<enter>C-Q C-J
+;; where C-Q is the quote and C-J is the newline.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; E N D  O F  F I L E
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
