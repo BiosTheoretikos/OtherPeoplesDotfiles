@@ -1,0 +1,10 @@
+DotNet4.6.1
+dotnetcore-sdk
+elasticsearch
+nssm
+server-jre8
+vcredist140
+vcredist2015
+visualstudio2017-installer
+visualstudio2017enterprise
+docker-for-windows

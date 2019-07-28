@@ -1,0 +1,131 @@
+# -*- mode: conf -*-
+# bspwm hotkeys {{{
+super + {_,shift} + w
+    bspc node -{c,k}
+
+super + s
+    bspc config pointer_follows_focus true; \
+    bspc node -t $(bspc query -N -n -n .tiled >/dev/null && echo floating || echo tiled); \
+    bspc node -f; \
+    bspc config pointer_follows_focus false
+
+super + f
+    bspc node -t ~fullscreen
+
+# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
+super + y
+    bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
+alt + {_,shift} + Tab
+    bspc node -f {next,prev}.local.normal
+
+super + {_,shift} + Tab
+    bspc node -f {next,prev}.local.normal
+
+super + t
+    bspc desktop -l next
+
+super + {_,shift,alt,ctrl} + {h,n,e,l}
+    {focus,move,resize,presel}.sh {west,south,north,east}
+
+super + {_,shift,alt,ctrl} + {Left,Down,Up,Right}
+    {focus,move,resize,presel}.sh {west,south,north,east}
+
+super + ctrl + space
+    bspc node -p cancel
+
+# send node to desktop on current monitor index
+# super + {_,shift} + {1-9}
+    # bspc {desktop -f,node -d} focused:^{1-9}
+
+# super + {_,shift} + {1-9}
+#      echo {tgroup,twid $(bspc query -N -n)} {1-9} >/tmp/bspgroups
+
+super + {1-9}
+    num={1-9}; cgrep bgroups && \
+    echo tgroup $num >/tmp/bspgroups || \
+    bspc desktop -f focused:^$num
+
+super + shift + {1-9}
+    num={1-9}; cgrep bgroups && \
+    echo twid $(bspc query -N -n) $num >/tmp/bspgroups || \
+    bspc node -d focused:^$num
+
+# insert receptacle, or clear receptacles on current desktop
+super + {_,shift} + r
+    {bspc node -i,for win in `bspc query -N -d -n .leaf.!window`; do bspc node $win -k; done}
+
+# rotate, balance
+super + {_,shift} + semicolon
+    bspc node $(bspc query -N -n -n .!leaf || echo @/) {-R 90,-B}
+
+# hide current node, or restore a queried hidden node
+# todo: revisit this
+# super + {_,shift} + minus
+    # bspc node {,$(bspc query -N -d -n .hidden | head -n 1)} -g hidden
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+    bspc node -f @{parent,brother,first,second}
+
+# kill panel, nicely ask all windows to close, quit.
+# todo: ask nicely for real.
+super + shift + q
+    pgrep lemonbar && panelt; \
+    zenity --question "Quit wm?" && bspc quit
+
+# toggle panel or gaps.
+super + {_,shift} + slash
+    {gap,panel}t
+
+# }}}
+
+# wm independent hotkeys {{{
+
+#super + p
+#    ~/.wm/scripts/i3blur.sh
+
+super + Return
+    elisp '(ns/spawn-terminal)' || $TERMINAL
+
+super + o
+    $BROWSER
+
+# dmenu
+super + {_,shift,alt} + space
+    action={run,pass,switcher}; \
+    export GTK_THEME="$(theme getval GTK_THEME)"; \
+    dmenu_$action $(dmenu_options $action)
+
+XF86Audio{Prev,Next,Play}
+     mpc -q {prev,next,toggle}
+
+XF86Audio{LowerVolume,RaiseVolume,Mute}
+    amixer -q set Master {3%-,3%+,toggle}
+
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# from here down are keys that I'm treating like macro keys
+
+# mute toggle
+Pause
+    ponymix toggle
+
+# pretend +
+super + {minus,equal}
+    ponymix {decrease,increase} 5; notify-send --urgency=low "Volume: $(ponymix get-volume)"
+
+# < > `
+super + {comma,period,grave}
+    player.sh {prev,next,toggle}
+
+F10
+    music bl
+
+F9
+    sh -c "$(. $HOME/.profile && shot)"
+
+F8
+    utf8
+# }}}

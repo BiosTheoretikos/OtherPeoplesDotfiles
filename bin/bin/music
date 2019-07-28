@@ -1,0 +1,162 @@
+#!/usr/bin/env bash
+# -*- eval: (setq-local sh-basic-offset 2) -*-
+
+musicdir="$HOME/Music"
+
+# add a url to library, fallback on clipboard content
+add() {
+  url="$*"
+  [ -z "$url" ] && url="$(xclip -o -selection clipboard)"
+  echo "$url" >> "$musicdir/import_history.log"
+  mkdir -p "$musicdir/import"
+  youtube-dl -x -i -o "$musicdir/import/%(uploader)s/%(title)s.%(ext)s" "$url"
+  mpc update
+}
+
+# delete the currently playing song
+del() {
+  location="$(mpc -f "%file%" | head -n 1)"
+  rm "$musicdir/$location"
+  mpc next
+  mpc update
+}
+
+# resume
+toggle() {
+  mpc toggle
+}
+
+# reshuffle current selection from all
+shuffle() {
+  mpc clear
+  if [ -z "$*" ]; then
+      mpc listall | sort -R | head -n 1000 | mpc add
+  else
+    append "$*"
+  fi
+  echo "shuffle" > "$musicdir/playlist/current"
+  mpc play
+}
+
+shuffle_mixes() {
+
+  # probably cache this later
+  is_mix() {
+    milli="$(mediainfo --Inform="Audio;%Duration%" "$*" | sed 's/\..*//')"
+
+    if [ -z "$milli" ]; then
+      # ¯\_(ツ)_/¯
+      return 1
+    fi
+
+    seconds=$(( $milli / 1000))
+    if [ $seconds -gt $((60 * 25)) ]; then
+      return 0
+    else
+      return 1
+    fi
+  }
+
+  # mpc clear
+  # this is gonna take forever
+  list_mixes() {
+    while read -r song; do
+      if is_mix "${musicdir}/$song"; then
+	echo "$song"
+      fi
+    done < <(mpc listall)
+  }
+
+  mpc clear
+  list_mixes | grep -v ASOT | grep -v "Dream Dance" | grep -v "Tiësto" | sort -R | head -n 1000 | mpc add
+  mpc play
+}
+
+append() {
+  echo append "$*"
+  mpc listall | grep -i "$*" | mpc add
+}
+
+# remove some search match from the playlist
+remove() {
+  echo remove "$*"
+  positions="$(mpc playlist -f '%position% %file%' | grep -i "$@" | sed 's/ .*//')"
+  delta=0
+  for position in $positions; do
+    mpc del $((position - delta))
+    delta=$((delta + 1))
+  done
+}
+
+# fuzzy search for a song, play it now
+now() {
+  if song="$(mpc listall | fzf)"; then
+      mpc insert "$song"
+      mpc next
+      mpc play
+  fi
+}
+
+# blacklist the currently playing song from the current playlist.
+bl() {
+  playlist="$(cat "$musicdir/playlist/current")"
+  songname="$(basename "$(mpc -f '%file%' | head -n 1)")"
+  printf "\n-$songname" >> "$musicdir/playlist/$playlist"
+  mpc next
+}
+
+# compose playlists by search results
+playlist() {
+  if target="$(ls $musicdir/playlist | fzf)"; then
+      echo "$target" > "$musicdir/playlist/current"
+      mpc clear
+      while read -r line ; do
+	case "${line:0:1}" in
+	  +) append "${line#?}";;
+	  -) remove "${line#?}";;
+	  *) ;;
+	esac
+      done < "$musicdir/playlist/$target"
+
+      # clear duplicates
+      # cf https://github.com/ajjahn/puppet-mpd/blob/master/files/mpd-remove-duplicates.sh
+      while read -r song; do
+	count=$(echo "$song" | sed -e "s/^[ \t]*//" | cut -d" " -f1);
+	song=$(echo "$song" | sed -e "s/^[ \t]*//" | cut -d" " -f2-);
+	for (( i = 2 ; i <= $count; i++ )); do
+	  mpc playlist | grep -n "$song" | tail -n 1 | cut -d: -f1 | mpc del;
+	done;
+      done < <(mpc playlist | sort | uniq -d -c )
+
+      mpc shuffle
+      mpc play
+  fi
+}
+
+infoname() {
+  name="$(mpc -f '%title% - %artist%' | head -n 1)"
+  if [ "$name" = ' - ' ]; then
+    name="$(basename "$(mpc -f '%file%' | head -n 1)")"
+    name="${name%.*}"
+  fi
+  echo "$name"
+}
+
+info() {
+  name="$(infoname)"
+  playlist_info="$(echo playlist: $(cat ~/Music/playlist/current) ┃ $(playlist_length))"
+
+  length="$(wc -L <<< "$name")"
+  percent="$(mpc | awk 'match($0,/([0-9]+)%/, groups) {print groups[1]}')"
+  progress="$("$HOME/.wm/panel/tools/mkb" $percent $length)"
+
+  cat<<EOF
+$name
+$progress
+$playlist_info
+EOF
+}
+
+op=${1:-toggle}
+shift
+$op "$*"

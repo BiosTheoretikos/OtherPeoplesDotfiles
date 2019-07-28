@@ -1,0 +1,37 @@
+#!/bin/sh
+# neeasade
+# custom monocle mode
+# no longer used: https://github.com/baskerville/bspwm/commit/bc3649fc372e043f5e64ee76bc633d0ab13ea775
+# this is still useful in a multihead situation where the monitors are not the same.
+
+# mon id
+target_mon="$1"
+
+# percent of the monitor to use for single node
+window_percent=.55
+
+mon_width=$(bspc query -T -m $target_mon | jq .rectangle.width)
+window_width=$(echo $window_percent \* $mon_width | bc -l)
+pad_width=$(echo "($mon_width - $window_width)/2" | bc -l)
+
+# don't do anything if our target monitor has wrong proportions
+mon_height=$(bspc query -T -m $target_mon | jq .rectangle.height)
+[ $mon_height -gt $mon_width ] && exit
+
+bspc subscribe node_{add,remove,focus} desktop_{focus,layout} | while read nope; do
+    ! [ "$(bspc query -M -m)" = "$target_mon" ] && continue
+    desk=$(bspc query -D -d $target_mon:focused)
+
+    node_count=$(bspc query -N -d $desk -n .leaf.tiled | wc -l)
+    single_window=$(iif "[ $node_count -eq 1 ]")
+    monocle_layout=$(iif "bspc query -T -d $desk | jq .layout | grep monocle")
+    is_emacs=$(iif "xtitle | grep emacs")
+
+    if ($monocle_layout && ! $is_emacs) || ($single_window && ! $is_emacs); then
+        bspc config -d $desk left_padding  $pad_width
+        bspc config -d $desk right_padding $pad_width
+    else
+        bspc config -d $desk left_padding  0
+        bspc config -d $desk right_padding 0
+    fi
+done

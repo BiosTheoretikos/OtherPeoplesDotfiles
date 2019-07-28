@@ -1,0 +1,83 @@
+# -*- mode: sh -*-
+ESHELL=$(iif '[ -n "$INSIDE_EMACS" ] && [ "$TERM" = "dumb" ]')
+
+if ! "$ESHELL"; then
+  ESHELL=$(iif '$REMOTE && [ "$TERM" = "dumb" ]')
+fi
+
+if [ -z "$cur_shell" ]; then
+  cur_shell=$(ps | grep $$ |  sed 's/^.* //')
+  cur_shell="${cur_shell##*/}"
+fi
+
+path_remove() {
+  PATH=${PATH//":$1:"/":"} # middle
+  PATH=${PATH/#"$1:"/}     # beginning
+  PATH=${PATH/%":$1"/}     # end
+}
+
+to_term() {
+  cat <<EOF
+  $1() {
+    setsid sh -c "( $TERMINAL -e '$1 \$@'; elisp '(ns/spawn-terminal)')" &
+    sleep 0.2
+    elisp "(run-at-time 0 nil 'delete-frame)" >/dev/null
+  }
+EOF
+}
+
+# if emacs is non-responsive, blow past it.
+emacs_timeout=$(iif 'has timeout' 'timeout 1' '')
+
+# todo: tramp emacsclient?
+[ "$cur_shell" = "zsh" ] && setopt SH_WORD_SPLIT
+if $ESHELL && ! $REMOTE && silent $emacs_timeout emacsclient --eval "(progn t)"; then
+  [ "$cur_shell" = "zsh" ] && unsetopt SH_WORD_SPLIT
+
+  eclient="emacsclient"
+
+  if $WINDOWS; then
+    eclient="${eclient}w --server-file $HOME/.emacs.d/server/${EMACS_SERVER_FILE:-emacs-server-file}"
+  fi
+
+  set_editor "$eclient"
+
+  succ .emacs.d/scripts
+  PAGER="epager"
+
+  for yeet in htop nethack cava; do
+    if has $yeet; then
+      eval "$(to_term $yeet)"
+    fi
+  done
+
+  sxhkd() {
+    path_remove "$HOME/.emacs.d/scripts"
+    $(type -a sxhkd | sort | awk 'END{print $3}')
+  }
+
+  man() {
+    elisp "(woman \"$*\") (require 'man) (Man-cleanup-manpage)"
+  }
+
+  clear() {
+    elisp "(run-at-time 0 nil 'comint-clear-buffer)" >/dev/null
+  }
+
+  # won't work in sh, but is fine in bash/zsh
+  exit() {
+    if [ $(jobs | wc -l) -ne 0 ]; then
+      echo "There are jobs present."
+    else
+      elisp "(run-at-time 0 nil 'delete-frame)"
+    fi
+  }
+
+  ranger() {
+    elisp '(deer)'
+  }
+
+  # alias sudo='sudo PS1=$PS1 PAGER=$PAGER'
+  # todo: sudo alias that can pass along PAGER var
+  # maybe something else if we think of it too
+fi

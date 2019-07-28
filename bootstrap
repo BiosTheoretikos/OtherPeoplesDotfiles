@@ -1,0 +1,60 @@
+#!/bin/sh
+# depends on git, sh.
+
+for dir in bin git notes .config; do
+  mkdir -p "~/$dir"
+done
+
+[ ! -d "~/.dotfiles" ] && git clone "https://github.com/neeasade/dotfiles" "~/.dotfiles"
+cd "~/.dotfiles"
+
+stoww() {
+  if [ ! -d "~/git/stowsh" ]; then
+      git clone "https://github.com/neeasade/stowsh" "~/git/stowsh"
+  fi
+
+  "~/git/stowsh/stowsh" -t .. "$@"
+}
+
+core() {
+  stoww bin shell vim tools
+}
+
+emacs() {
+  git clone "https://github.com/neeasade/emacs.d" "~/.emacs.d"
+
+  # initial launch/install packages
+  type emacs >/dev/null 2>&1 && emacs
+}
+
+rice() {
+  core
+  stoww sxhkd wm
+}
+
+windows() {
+  # prereq: windows/bootstrap.cmd
+  core
+
+  for item in "$(cat ~/.dotfiles/windows/scoop.txt)"; do
+    scoop install $item
+  done
+
+  # windows bin
+  stoww windows
+}
+
+docker() {
+  sudo apt-get update
+  sudo apt-get install curl
+
+  curl https://nixos.org/nix/install | sh
+}
+
+[ "$USER" = "emacser" ] && docker
+
+# core, emacs, rice, windows
+op=${1:-core}
+echo bootstrapping $op...
+$op
+echo done.
