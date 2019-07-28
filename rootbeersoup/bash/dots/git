@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Git
+# ---
+
+# Alias `git` to `hub` on macOS
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    alias git="hub"
+fi
+
+alias ga="git add"
+alias gall="git add --all"
+alias gc="git commit"
+alias gca="git commit --amend"
+alias gcl="git clone --recursive"           # Clone including any submodules
+alias gd="git diff"
+alias gf="git fetch --dry-run --verbose"
+alias gl="git log --oneline -n 10"
+alias gp="git push -u origin master"
+alias gpd="git push -u origin dev"          # Push to `dev` branch
+alias gpl="git pull origin master"          # Pull from master
+alias gps="git push server"                 # Push to server (defined in local config)
+alias gs="git status -sb"
+
+# Quick commit with message without quotes
+function qc ()
+{
+    message=$*
+
+    if [[ $message ]]; then   
+        git commit -m "${message}"
+    else
+        printf "\\033[31mERROR:\\033[0m Commit message required\\n"
+        return 1
+    fi
+}

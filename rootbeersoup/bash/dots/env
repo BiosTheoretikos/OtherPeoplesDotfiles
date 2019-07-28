@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Ignores all one-word and two-word commands for more efficient
+# bash history searching
+export HISTIGNORE=?:??
+
+# ls colors
+export CLICOLOR=1
+export LSCOLORS=exgxbxbxCxfxfxCaCaeaea
+
+export EDITOR='vim'
+export GPG_TTY=$(tty)
+
+export HOMEBREW_CURLRC=1
+export HOMEBREW_FORCE_BREWED_CURL=1
