@@ -1,0 +1,4 @@
+--strict
+--date-format %Y-%m-%d
+--file ~/Sync/finance/strict.ledger
+--file ~/Sync/finance/journal.ledger
