@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+# load all necessary completion and init stuff
+[ -f ~/.zgen/zgen.zsh ] && source ~/.zgen/zgen.zsh
+[ -f ~/.zprezto/init.zsh ] && source ~/.zprezto/init.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.settings ] && source ~/.fzf.settings
+[ -f ~/.npmrc.sh ] && source ~/.npmrc.sh
+[ -f ~/.t.sh ] && source ~/.t.sh
+
+[ $commands[kubectl] ] && source <(kubectl completion zsh)
+
+# load local customizations
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+if ! zgen saved; then
+    zgen prezto
+    zgen load sobolevn/wakatime-zsh-plugin
+    zgen save
+fi

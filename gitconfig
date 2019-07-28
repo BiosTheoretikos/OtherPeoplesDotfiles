@@ -1,0 +1,93 @@
+[init]
+    templatedir = ~/.git_template
+
+[core]
+    editor = nvim
+    excludesfile = ~/.gitignore
+
+    # dont ignore case
+    ignorecase = false
+
+    # Treat spaces before tabs and all kinds of trailing whitespace as an error
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+    # Speed up commands involving untracked files such as `git status`.
+    # https://git-scm.com/docs/git-update-index#_untracked_cache
+    untrackedCache = true
+
+[include]
+    path = ~/.gitconfig.local
+
+[alias]
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+    commits = ! fshow
+    fixup = commit --fixup
+    fresh =  ! git_fresh
+
+[apply]
+
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
+
+[url "https://github.com/"]
+    insteadof = git://github.com/
+
+[url "https://git.openstack.org/"]
+    insteadof = git://git.openstack.org/
+
+[gc]
+    auto = 1
+
+[pull]
+    rebase = true
+
+[push]
+    default = simple
+
+[fetch]
+    # delete local state repositories that no longer exists
+    # in remote
+    prune = true
+
+[rebase]
+    # auto squash fixups by default
+    autosquash = true
+
+[status]
+    # show submodules summary by default
+    submoduleSummary = true
+
+[rerere]
+	enabled = 1
+
+[merge]
+	summary = true
+	tool = nvimmerge
+	conflictstyle = diff3
+
+[diff]
+	tool = nvimdiff
+	guitool = opendiff
+
+[mergetool]
+	prompt = true
+
+[difftool]
+	prompt = true
+
+[mergetool "nvimmerge"]
+	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[difftool "nvimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[color]
+  ui = true
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

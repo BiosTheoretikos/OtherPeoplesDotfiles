@@ -1,0 +1,115 @@
+---
+x-build-steps: &build_steps
+  steps:
+    - run:
+        name: Install prerequistes
+        command: |
+          apt-get update -qq
+          apt-get install apt-utils -yqq
+
+          apt-get install \
+            git \
+            locales \
+            python3 python3-apt \
+            ssh ca-certificates \
+            lsb-release \
+            -yqq \
+            --no-install-recommends
+
+          apt-get autoclean -yqq
+          apt-get autoremove -yqq
+    - checkout
+    - run:
+        name: Checkout modules
+        command: |
+          git submodule sync --recursive
+          git submodule update --recursive --init \
+            --checkout --no-recommend-shallow --force
+    - run:
+        name: Configure timezone & timezone
+        command: |
+          echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
+          echo 'tzdata tzdata/Zones/Europe select Warsaw' | debconf-set-selections
+
+          echo 'locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8' | debconf-set-selections
+          echo 'locales locales/default_environment_locale select en_US.UTF-8' | debconf-set-selections
+
+          echo 'keyboard-configuration  keyboard-configuration/layout select  English (UK)' | debconf-set-selections
+
+          locale-gen en_US.UTF-8
+          ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
+
+          apt-get install tzdata -y --no-install-recommends
+
+          apt-get autoclean -yqq
+          apt-get autoremove -yqq
+    - run:
+        name: Display project status
+        command: |
+          git status
+          git submodule status
+          ls -ltr
+          git submodule status | awk -F '[ ]' '{print $3}' | xargs du -sh
+    - run:
+        name: Run an installation
+        command: |
+          ./install \
+            "${CIRCLE_PROJECT_USERNAME}" \
+            "${CIRCLE_BUILD_NUM}" \
+            "${CIRCLE_PROJECT_USERNAME}@${CIRCLE_PROJECT_REPONAME}.M" \
+            "Circle Builds" \
+            "${CIRCLE_SHA1}"
+    - run:
+        name: Verify !
+        command: |
+          zsh -il -c echo "Veryfying the build ${CIRCLE_BUILD_NUM}"
+          zsh -il -c .installer/verify_install.sh
+
+version: 2.1
+jobs:
+  shellcheck:
+    docker:
+      - image: nlknguyen/alpine-shellcheck:latest
+    steps:
+      - checkout
+      - run:
+          name: Check Scripts
+          command: |
+            shellcheck install post-install --external-sources
+            find bin/ -type f | xargs shellcheck --external-sources
+            find .installer/ -type f | xargs shellcheck --external-sources
+            find . -type f -name '*.sh' | wc -l
+            find . -type f -name '*.sh' | xargs shellcheck --external-sources
+
+  submodules:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: "Submodules :: checkout"
+          command: .circleci/submodules_step.sh
+
+  build_ubuntu_19_04:
+    docker:
+      - image: ubuntu:19.04
+    <<: *build_steps
+  build_ubuntu_18_10:
+    docker:
+      - image: ubuntu:18.10
+    <<: *build_steps
+  build_ubuntu_18_04:
+    docker:
+      - image: ubuntu:18.04
+    <<: *build_steps
+
+workflows:
+  version: 2
+  verify:
+    jobs:
+      - submodules
+      - shellcheck
+  build:
+    jobs:
+      - build_ubuntu_19_04
+      - build_ubuntu_18_10
+      - build_ubuntu_18_04
