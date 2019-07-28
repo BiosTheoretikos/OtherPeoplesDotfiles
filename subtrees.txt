@@ -42,3 +42,4 @@ Overbryd	https://github.com/Overbryd/dotfiles.git
 paulmillr	https://github.com/paulmillr/dotfiles.git
 ridhwaans	https://github.com/ridhwaans/dotfiles.git
 rkalis	https://github.com/rkalis/dotfiles.git
+xero	https://github.com/xero/dotfiles.git
