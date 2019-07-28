@@ -1,0 +1,84 @@
+[user]
+	email = andrew@schwartzmeyer.com
+	name = Andrew Schwartzmeyer
+[core]
+	abbrev = 9
+	editor = emacsclient --create-frame
+[advice]
+	statusHints = false
+	commitBeforeMerge = false
+	detachedHead = false
+	waitingForEditor = false
+[alias]
+	a = add
+	b = branch --sort=-committerdate
+	bm = branch --merged
+	bnm = branch --no-merged
+	c = commit --verbose
+	amend = commit --verbose --amend
+	extend = commit --verbose --amend --no-edit
+	co = checkout
+	d = diff
+	dn = diff --name-only
+	ds = diff --staged
+	du = count-objects --verbose --human-readable
+	f = fetch --all
+	h = help
+	hc = help config
+	l = log --graph --pretty=oneline
+	lf = log --pretty=fuller
+	m = merge
+	nuke = !git clean -fdx && git submodule foreach git clean -fdx
+	p = pull
+	ps = push
+	psf = push --force-with-lease
+	r = reset
+	rh = reset --hard
+	ru = reset @{u}
+	rhu = reset --hard @{u}
+	re = rebase
+	rei = rebase --interactive
+	root = rev-list --max-parents=0 HEAD
+	s = status
+	sh = show
+	shepherd = lol --perl-regexp --committer=\"Andrew Schwartzmeyer\" --author=\"^(?!Andrew Schwartzmeyer).*$\"
+	sub = submodule
+	y = cherry-pick
+	z = stash
+[am]
+	threeWay = true
+[apply]
+	ignoreWhitespace = change
+[branch]
+	autoSetupRebase = always
+	autosetupmerge = always
+[color]
+	ui = auto
+[credential]
+	helper = cache --timeout 30000 # seconds
+[diff]
+	mnemonicPrefix = true
+	renames = copies
+[format]
+	pretty = medium
+[help]
+	autoCorrect = -1
+[log]
+	abbrevCommit = true
+	date = local
+	decorate = short
+[merge]
+	stat = true
+[pull]
+	ff = only
+[push]
+	default = current
+[rebase]
+	stat = true
+	autoSquash = true
+	autoStash = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[include]
+	path = ./local
