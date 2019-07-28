@@ -5,3 +5,4 @@ Abhishek	https://github.com/2KAbhishek/Dotfiles.git
 adityarpillai	https://github.com/adityarpillai/jumpstart.git
 aeolyus	https://github.com/aeolyus/dotfiles.git
 AndersBallegaard	https://github.com/AndersBallegaard/dotfiles.git
+MrPickles	https://github.com/MrPickles/dotfiles.git
