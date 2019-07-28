@@ -34,3 +34,4 @@ kutsan	https://github.com/kutsan/dotfiles.git
 mattorb	https://github.com/mattorb/dotfiles.git
 mihaliak	https://github.com/mihaliak/dotfiles.git
 mohitsinghs	https://github.com/mohitsinghs/dotfiles.git
+neeasade	https://github.com/neeasade/dotfiles.git
