@@ -23,3 +23,4 @@ solarized	https://github.com/altercation/solarized.git
 liquidprompt	https://github.com/nojhan/liquidprompt.git
 Kraymer	https://github.com/Kraymer/F-dotfiles.git
 volny	https://github.com/volny/dotconfig.git
+huyvohcmc	https://github.com/huyvohcmc/dotfiles.git
