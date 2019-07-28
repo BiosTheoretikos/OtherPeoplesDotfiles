@@ -1,0 +1,19 @@
+.AppleDouble
+.DS_Store
+.LSOverride
+._*
+.git_template/hooks/disabled-pc
+id_rsa
+# desktop image backups
+img/*.backup.jpg
+node_modules
+# personal swap gitconfigs
+homedir/.gitconfig_*
+homedir/.vim/backup/*
+!homedir/.vim/backup/.gitignore
+homedir/.vim/temp/*
+!homedir/.vim/temp/.gitignore
+homedir/.vim/.netrwhist
+homedir/.vim/bundle/*
+!homedir/.vim/bundle/.gitignore
+!homedir/.vim/bundle/Vundle.vim
