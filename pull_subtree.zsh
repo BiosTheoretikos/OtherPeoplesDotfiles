@@ -5,7 +5,7 @@
 # typeset debug=1
 
 typeset remote_url=$1
-typeset subtree_name=${2:-${${remote_url##*\/}%.git}}
+typeset subtree_name="${2:-${${remote_url##*\/}%.git}}"
 
 if [[ -v debug ]]
 then
@@ -14,4 +14,4 @@ then
 	exit 0
 fi
 
-git subtree pull --squash --prefix=${subtree_name} ${remote_url} master
+git subtree pull --squash --prefix="${subtree_name}" ${remote_url} master

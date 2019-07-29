@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-while read name url
+while read url name
 do
 	./pull_subtree.zsh $url $name
 done < subtrees.txt
